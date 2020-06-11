@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+ name: myrs
+ labels:
+  app: web2  #  this is the label of RC not label of pods
+
+spec:
+ selector:
+  matchLabels:
+    x: hellolaveena
+ replicas: 3  #  always one pod will be present even in case of current worker node failure
+ template:
+  metadata:
+   name: mypod1  #  this will be the podname that will be created by RC
+   labels:
+    x: hellolaveena
+  spec:
+   containers:
+    - name: mycon1
+      image: nginx
+      ports:
+       - containerPort: 80 
